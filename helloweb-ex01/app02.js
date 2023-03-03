@@ -1,15 +1,22 @@
 var http = require('http');
+var fs = require('fs');
 
 var port = 9090;
-var server = http.createServer(function(req, resp) { // 요청이 들어오면 실행되는 function
-    console.log(req);
+var server = http.createServer(function(req, resp){
+    console.log(req.url);
     
-    resp.writeHead(200, {
-        'Content-Type' : "text/html"
+    if(req.url === '/') {
+        req.url = '/index.html';
+    }
+
+    fs.readFile(__dirname + "/public" + req.url, function(error, data) {
+        resp.writeHead(200, {
+            'Content-Type': "text/html"
+        });
+        resp.end(data);   
     });
-    resp.end('<h1>Hello World!</h1>')
 });
 
-server.listen(port, function() {
-    console.log("http server running on " + port);
+server.listen(port, function(){
+    console.log('http server running on ' + port);
 });
