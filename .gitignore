@@ -1,0 +1,13 @@
+
+## Maven
+**/target/ 
+**/build/
+**/out
+
+##eclise
+**/.settings
+**/.classpath
+**/.project
+
+## node(javascript) project
+**/node_modules
